@@ -52,11 +52,11 @@ exports.downloadIncomeExcel = async (req, res) => {
   try {
     const income = await Income.find({ userId }).sort({ date: -1 });
 
-    const data = income.map((item) => {
-      Source: item.source;
-      Amount: item.amount;
-      Date: item.date;
-    });
+    const data = income.map((item) => ({
+      Source: item.source,
+      Amount: item.amount,
+      Date: item.date,
+    }));
 
     const wb = xlsx.utils.book_new();
     const ws = xlsx.utils.json_to_sheet(data);
